@@ -4,10 +4,7 @@ import "./MenuItem.scss";
 
 const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
 	const navigate = useNavigate();
-	useEffect(() => {
-	  	
-	}, [navigate])
-	
+
 	return (
 		<div
 			className={`menu-item ${size}`}
