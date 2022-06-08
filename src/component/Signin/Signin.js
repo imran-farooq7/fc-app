@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../Button/Button";
 import FormInput from "../FormInput/FormInput";
 import "./Signin.scss";
 
@@ -42,7 +43,9 @@ const Signin = () => {
 					onChange={onChangeHandler}
 					label="Password"
 				/>
-				<input type="submit" value="submit" />
+				<Button type="submit" value="submit">
+					Sign in
+				</Button>
 			</form>
 		</div>
 	);
