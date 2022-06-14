@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Crown } from "../../assets/crown.svg";
-import './Header.scss'
+import "./Header.scss";
 
 const Header = () => {
 	return (
@@ -15,6 +15,9 @@ const Header = () => {
 				</Link>
 				<Link to="/contact" className="option">
 					CONTACT
+				</Link>
+				<Link to="/signin" className="option">
+					SIGN IN
 				</Link>
 			</div>
 		</div>
