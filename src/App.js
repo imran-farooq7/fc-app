@@ -8,28 +8,28 @@ import { auth } from "./firebase";
 import { useEffect, useState } from "react";
 
 function App() {
-	const [currentUser, setCurrentUser] = useState(null);
-	let unsubscribeUserAuth = null;
-	useEffect(() => {
-		unsubscribeUserAuth = auth.onAuthStateChanged((user) => {
-			setCurrentUser(user);
-			console.log(user);
-		});
-		return () => {
-			unsubscribeUserAuth();
-		};
-	}, []);
+  const [currentUser, setCurrentUser] = useState(null);
+  let unsubscribeUserAuth = null;
+  useEffect(() => {
+    unsubscribeUserAuth = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      console.log(user);
+    });
+    return () => {
+      unsubscribeUserAuth();
+    };
+  }, []);
 
-	return (
-		<div>
-			<Header />
-			<Routes>
-				<Route path="/" element={<HomePage />} />
-				<Route path="/shop" element={<ShopPage />} />
-				<Route path="/signin" element={<SigninSignup />} />
-			</Routes>
-		</div>
-	);
+  return (
+    <div>
+      <Header currentUser={currentUser} />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/signin" element={<SigninSignup />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
