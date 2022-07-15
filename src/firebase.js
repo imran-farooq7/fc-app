@@ -1,6 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import {
+	getFirestore,
+	collection,
+	addDoc,
+	getDoc,
+	setDoc,
+	doc,
+} from "firebase/firestore";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -11,7 +18,28 @@ const firebaseConfig = {
 	messagingSenderId: "241497575912",
 	appId: "1:241497575912:web:2fb526820cf4187661145d",
 };
+export const createUserDocumentFromAuth = async (userAuth) => {
+	const userDocRef = doc(db, "users", userAuth.uid);
 
+	const userSnapshot = await getDoc(userDocRef);
+
+	if (!userSnapshot.exists()) {
+		const { displayName, email } = userAuth;
+		const createdAt = new Date();
+
+		try {
+			await setDoc(userDocRef, {
+				displayName,
+				email,
+				createdAt,
+			});
+		} catch (error) {
+			console.log("error creating the user", error.message);
+		}
+	}
+
+	return userDocRef;
+};
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -39,3 +67,16 @@ export const signInWithGoogle = () => {
 			// ...
 		});
 };
+// const addUser = async () => {
+//   try {
+//     const docRef = await addDoc(collection(db, "users"), {
+//       first: "Ada",
+//       last: "Lovelace",
+//       born: 1815,
+//     });
+//     console.log("Document written with ID: ", docRef.id);
+//   } catch (e) {
+//     console.error("Error adding document: ", e);
+//   }
+// };
+// addUser();

@@ -8,7 +8,7 @@ const Directory = () => {
 			title: "hats",
 			imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
 			id: 1,
-			linkUrl: "hats",
+			linkUrl: "shop/hats",
 		},
 		{
 			title: "jackets",
@@ -37,7 +37,7 @@ const Directory = () => {
 			linkUrl: "shop/mens",
 		},
 	]);
-	const menuItems = sections.map(({id, ...props}) => {
+	const menuItems = sections.map(({ id, ...props }) => {
 		return <MenuItem key={id} {...props} />;
 	});
 	return <div className="directory-menu">{menuItems}</div>;
